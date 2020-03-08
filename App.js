@@ -120,13 +120,25 @@ export default function App(props) {
                     component={SignInScreen}
                     options={{
                       title: 'Sign in',
+                      headerStyle: styles.headerStyle,
+                      headerTitleContainerStyle: styles.headerTitleContainerStyle,
+                      headerTitleStyle: styles.headerTitleStyle,
                       // When logging out, a pop animation feels intuitive
                       // You can remove this if you want the default 'push' animation
                       animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                     }}
                   />
                 ): (
-                  <Stack.Screen name="Root" component={BottomTabNavigator} />
+                  <Stack.Screen 
+                    name="Root" 
+                    component={BottomTabNavigator} 
+                    options={{
+                      title: 'Sign in',
+                      headerStyle: styles.headerStyle,
+                      headerTitleContainerStyle: styles.headerTitleContainerStyle,
+                      headerTitleStyle: styles.headerTitleStyle,
+                    }} 
+                  />
                 )}
               </Stack.Navigator>
           </NavigationContainer>
@@ -141,6 +153,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FDF0CD',
+  },
+  headerStyle: {
+    backgroundColor: '#FDF0CD',
+    shadowOpacity: 0,
+    shadowColor: 'transparent',
+    elevation: 0,
+    borderBottomWidth: 2,
+    borderBottomColor: '#1A4876'
+  },
+  headerTitleStyle: {
+    color: '#1A4876',
+    fontFamily: 'sniglet'
   }
-
 });
