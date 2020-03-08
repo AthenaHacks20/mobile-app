@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, Platform, StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import { MonoText } from '../components/StyledText';
+import { SnigletText } from '../components/StyledText';
 import { AuthContext } from '../authContext';
 
 
@@ -14,7 +14,7 @@ export default function SignInScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
-            <Text>Welcome to</Text>
+            <SnigletText>Welcome to</SnigletText>
             <Input
                 placeholder="Username"
                 value={username}

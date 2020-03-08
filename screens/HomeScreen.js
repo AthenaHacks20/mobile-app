@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import { WebView } from 'react-native-webview';
 
-import { MonoText } from '../components/StyledText';
+import { SnigletText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
   
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
+            <SnigletText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</SnigletText>
           </View>
         </View>
       </View>
