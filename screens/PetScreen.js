@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Asset } from 'expo-asset';
 import { AR } from 'expo';
 // Let's alias ExpoTHREE.AR as ThreeAR so it doesn't collide with Expo.AR.
@@ -8,6 +9,7 @@ import { BackgroundTexture, Camera, Light, Points } from 'expo-three-ar';
 // expo-graphics manages the setup/teardown of the gl context/ar session, creates a frame-loop, and observes size/orientation changes.
 // it also provides debug information with `isArCameraStateEnabled`
 import { View as GraphicsView } from 'expo-graphics';
+import TalkButton from '../components/TalkButton';
 
 export default class PetScreen extends React.Component {
   componentDidMount() {
@@ -23,16 +25,21 @@ export default class PetScreen extends React.Component {
     // `arTrackingConfiguration` denotes which camera the AR Session will use. 
     // World for rear, Face for front (iPhone X only)
     return (
-      <GraphicsView
-        style={{ flex: 1 }}
-        onContextCreate={this.onContextCreate}
-        onRender={this.onRender}
-        onResize={this.onResize}
-        isArEnabled
-        isArRunningStateEnabled
-        isArCameraStateEnabled
-        arTrackingConfiguration={'ARWorldTrackingConfiguration'}
-      />
+      <View style={{ flex: 1}}>
+        <View style={styles.fab}>
+          <TalkButton />
+        </View>
+        <GraphicsView
+          style={{ flex: 1 }}
+          onContextCreate={this.onContextCreate}
+          onRender={this.onRender}
+          onResize={this.onResize}
+          isArEnabled
+          isArRunningStateEnabled
+          isArCameraStateEnabled
+          arTrackingConfiguration={'ARWorldTrackingConfiguration'}
+        />
+      </View>
     );
   }
 
@@ -101,3 +108,12 @@ export default class PetScreen extends React.Component {
     this.renderer.render(this.scene, this.camera);
   };
 }
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    bottom: 32,
+    left: 48,
+    zIndex: 1
+  }
+})
