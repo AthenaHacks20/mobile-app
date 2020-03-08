@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, TextInput, TouchableOpacity, View, Button} from 'react-native';
+import { Text, Platform, StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as WebBrowser from 'expo-web-browser';
-import { AuthContext } from '../App';
-
 import { MonoText } from '../components/StyledText';
+import { AuthContext } from '../authContext';
+
 
 export default function SignInScreen() {
   const [username, setUsername] = React.useState('');
@@ -14,113 +14,64 @@ export default function SignInScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
-            <TextInput
+            <Text>Welcome to</Text>
+            <Input
                 placeholder="Username"
                 value={username}
                 onChangeText={setUsername}
+                containerStyle={styles.inputContainer}
+                inputContainerStyle={{borderBottomWidth:0}}
             />
-            <TextInput
+            <Input
                 placeholder="Password"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
+                containerStyle={styles.inputContainer}
+                inputContainerStyle={{borderBottomWidth:0}}
             />
-            <Button title="Sign in" onPress={() => signIn({ username, password })} />
+            <Button 
+                buttonStyle= {styles.buttonContainer} 
+                raised title="LOGIN" 
+                onPress={() => signIn({ username, password })} 
+            />
         </View>
       </ScrollView>
     </View>
   );
 }
 
-// SignInScreen.navigationOptions = {
-//   header: null,
-// };
+SignInScreen.navigationOptions = {
+  header: null,
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FDF0CD',
+  },
+  inputContainer: {
+    borderColor: '#1A4876',
+    borderWidth: 2,
+    borderRadius: 10,
+    marginVertical: 20,
     backgroundColor: '#fff',
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
   contentContainer: {
-    paddingTop: 30,
+    flex: 1,
+    paddingHorizontal: 50,
+    justifyContent: "center"
+  },
+  buttonContainer: { 
+    backgroundColor: "#FF6C78",
+    borderRadius: 5,
+    borderColor: '#1A4876', 
+    borderWidth: 2,
+    borderRadius: 25,
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    justifyContent: "center"
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
+
 });
