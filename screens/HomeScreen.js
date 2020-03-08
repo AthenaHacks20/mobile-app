@@ -6,30 +6,62 @@ import { WebView } from 'react-native-webview';
 
 import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <WebView
-            source={{ uri: 'http://athenahacks20-server.azurewebsites.net/map' }}
-            style={styles.mapContainer}
-            scalesPageToFit={false}
-            automaticallyAdjustContentInsets={false}
-          >
-          </WebView>
-        </View>
-      </ScrollView>
+export default class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+  componentDidMount() {
+    this.connectWebsocket();
+  }
 
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
+  connectWebsocket() {
+    this.ws = new WebSocket('ws://athenahacks20-server.azurewebsites.net/');
+    this.ws.onopen = () => {
+      this.ws.send(JSON.stringify({event: 'connectmap', user: 'sammy'}));
+    };
+    this.ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log(data);
+    };
+    this.ws.onerror = (err) => {
+      console.log('WEBSOCKET DISCONNECTED');
+      console.log(err);
+      this.connectWebsocket();
+    };
+  }
+
+  componentWillUnmount() {
+    if (this.ws) {
+      this.ws.close();
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View style={styles.welcomeContainer}>
+            <WebView
+              source={{ uri: 'http://athenahacks20-server.azurewebsites.net/map?user=sammy' }}
+              style={styles.mapContainer}
+              scalesPageToFit={false}
+              automaticallyAdjustContentInsets={false}
+            >
+            </WebView>
+          </View>
+        </ScrollView>
+  
+        <View style={styles.tabBarInfoContainer}>
+          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+  
+          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
+            <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 HomeScreen.navigationOptions = {
