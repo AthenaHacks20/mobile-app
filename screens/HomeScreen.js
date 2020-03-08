@@ -23,6 +23,9 @@ export default class HomeScreen extends React.Component {
     this.ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       console.log(data);
+      if (data.event === 'clickingotherpet') {
+        // TODO: Go to the AR page or something here.
+      }
     };
     this.ws.onerror = (err) => {
       console.log('WEBSOCKET DISCONNECTED');
