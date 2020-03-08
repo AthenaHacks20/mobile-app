@@ -46,7 +46,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         component={PetScreen}
         options={{
           title: 'My Pet',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" />,
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" style={styles.tabIcon} />,
         }}
       />
     </BottomTab.Navigator>
@@ -60,6 +60,8 @@ function getHeaderTitle(route) {
     case 'Home':
       return 'Explore';
     case 'Links':
+      return 'My Pet';
+    case 'MyPet':
       return 'My Pet';
   }
 }
