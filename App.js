@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View, TextInput, Button } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
+import { Input, Button } from 'react-native-elements';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AsyncStorage } from 'react-native';
@@ -10,9 +12,9 @@ import { AsyncStorage } from 'react-native';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import SignInScreen from './screens/SignInScreen';
+import { AuthContext } from './authContext'
 
 const Stack = createStackNavigator();
-const AuthContext = React.createContext();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -48,9 +50,8 @@ export default function App(props) {
       userToken: null,
     }
   );
-
-  // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
+    // Load any resources or data that we need prior to rendering the app
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHide();
@@ -89,8 +90,8 @@ export default function App(props) {
     loadResourcesAndDataAsync();
   }, []);
 
-  const authContext = React.createContext(
-    {
+  const authContext = React.useMemo(
+    () => ({
       signIn: async data => {
         //dummy token used rather than token from some server :(
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
@@ -99,14 +100,15 @@ export default function App(props) {
       signUp: async data => {
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
-    }
+    }),
+    []
   );
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
     return (
-      <AuthContext.Provider value={authContext}>
+      <AuthContext.Provider value={ authContext }>
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
@@ -132,13 +134,12 @@ export default function App(props) {
     );
   }
 }
-
 export { AuthContext }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#FDF0CD',
+  }
+
 });
