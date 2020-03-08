@@ -16,28 +16,28 @@ export default class HomeScreen extends React.Component {
   }
 
   connectWebsocket() {
-    this.ws = new WebSocket('ws://athenahacks20-server.azurewebsites.net/');
-    this.ws.onopen = () => {
-      this.ws.send(JSON.stringify({event: 'connectmap', user: 'sammy'}));
-    };
-    this.ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log(data);
-      if (data.event === 'clickingotherpet') {
-        // TODO: Go to the AR page or something here.
-      }
-    };
-    this.ws.onerror = (err) => {
-      console.log('WEBSOCKET DISCONNECTED');
-      console.log(err);
-      this.connectWebsocket();
-    };
+    // this.ws = new WebSocket('ws://athenahacks20-server.azurewebsites.net/');
+    // this.ws.onopen = () => {
+    //   this.ws.send(JSON.stringify({event: 'connectmap', user: 'sammy'}));
+    // };
+    // this.ws.onmessage = (event) => {
+    //   const data = JSON.parse(event.data);
+    //   console.log(data);
+    //   if (data.event === 'clickingotherpet') {
+    //     // TODO: Go to the AR page or something here.
+    //   }
+    // };
+    // this.ws.onerror = (err) => {
+    //   console.log('WEBSOCKET DISCONNECTED');
+    //   console.log(err);
+    //   this.connectWebsocket();
+    // };
   }
 
   componentWillUnmount() {
-    if (this.ws) {
-      this.ws.close();
-    }
+    // if (this.ws) {
+    //   this.ws.close();
+    // }
   }
 
   render() {
