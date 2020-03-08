@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Text, Platform, StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import { Text, Platform, StyleSheet, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { SnigletText } from '../components/StyledText';
 import { AuthContext } from '../authContext';
-
+import Logo from '../assets/images/header.png';
 
 export default function SignInScreen() {
   const [username, setUsername] = React.useState('');
@@ -15,7 +15,7 @@ export default function SignInScreen() {
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
             <SnigletText style={styles.subheaderStyle}>Welcome to</SnigletText>
-            <SnigletText style={styles.headerStyle}>AnimalAR</SnigletText>
+            <Image source={Logo} style={styles.logo} />
             <Input
                 placeholder="Username"
                 value={username}
@@ -56,10 +56,6 @@ const styles = StyleSheet.create({
   subheaderStyle: {
     fontSize: 24
   },
-  headerStyle: {
-    fontSize: 48,
-    marginBottom: 48
-  },
   container: {
     flex: 1,
     backgroundColor: '#FDF0CD',
@@ -90,5 +86,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: "center"
   },
-
+  logo: {
+    height: 125,
+    resizeMode: 'contain',
+    marginBottom: 48
+  }
 });
