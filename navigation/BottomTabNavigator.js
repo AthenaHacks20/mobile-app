@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
@@ -14,21 +15,29 @@ export default function BottomTabNavigator({ navigation, route }) {
   navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator 
+      initialRouteName={INITIAL_ROUTE_NAME} 
+      tabBarOptions={{
+        tabStyle: styles.tab,
+        labelStyle: styles.tabLabel,
+        style: styles.tabContainer,
+        activeTintColor: '#1A4876'
+      }}
+    >
       <BottomTab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'Get Started',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+          title: 'My Pet',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" style={styles.tabIcon} />,
         }}
       />
       <BottomTab.Screen
         name="Links"
         component={LinksScreen}
         options={{
-          title: 'Resources',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+          title: 'My Friends',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="user-friends" style={styles.tabIcon} />,
         }}
       />
     </BottomTab.Navigator>
@@ -40,8 +49,27 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'How to get started';
+      return 'Explore';
     case 'Links':
       return 'Links to learn more';
   }
 }
+
+const styles = StyleSheet.create({
+  tabContainer: {
+    backgroundColor: '#FDF0CD',
+    height: 84
+  },
+  tab: {
+    paddingBottom: 8,
+    borderColor: '#1A4876',
+    borderTopWidth: 2
+  },
+  tabLabel: {
+    fontFamily: 'sniglet',
+    fontSize: 16
+  },
+  tabIcon: {
+    color: '#FC6C85',
+  }
+});

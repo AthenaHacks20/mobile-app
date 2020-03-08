@@ -55,13 +55,13 @@ export default class HomeScreen extends React.Component {
           </View>
         </ScrollView>
   
-        <View style={styles.tabBarInfoContainer}>
+        {/* <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
   
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
             <SnigletText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</SnigletText>
           </View>
-        </View>
+        </View> */}
       </View>
     );
   }
