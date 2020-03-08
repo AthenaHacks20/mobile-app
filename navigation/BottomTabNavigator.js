@@ -28,16 +28,16 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'My Pet',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" style={styles.tabIcon} />,
+          title: 'Explore',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="compass" style={styles.tabIcon} />,
         }}
       />
       <BottomTab.Screen
         name="Links"
         component={LinksScreen}
         options={{
-          title: 'My Friends',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="user-friends" style={styles.tabIcon} />,
+          title: 'My Pet',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" style={styles.tabIcon} />,
         }}
       />
     </BottomTab.Navigator>
@@ -51,7 +51,7 @@ function getHeaderTitle(route) {
     case 'Home':
       return 'Explore';
     case 'Links':
-      return 'Links to learn more';
+      return 'My Pet';
   }
 }
 
