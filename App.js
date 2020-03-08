@@ -12,6 +12,7 @@ import { AsyncStorage } from 'react-native';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import SignInScreen from './screens/SignInScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import { AuthContext } from './authContext'
 
 const Stack = createStackNavigator();
@@ -42,6 +43,12 @@ export default function App(props) {
         ...prevState,
         isSignout: true,
         userToken: null,
+      }
+    }
+    else if (action.type === 'SELECT_PET') {
+      return {
+        ...prevState,
+        pet: action.pet
       }
     }},
     {
@@ -101,6 +108,9 @@ export default function App(props) {
       signUp: async data => {
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
+      selectPet: (pet) => {
+        dispatch({ type: 'SELECT_PET', pet: pet })
+      }
     }),
     []
   );
@@ -128,7 +138,18 @@ export default function App(props) {
                       animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                     }}
                   />
-                ): (
+                ) : state.pet == null ? (
+                  <Stack.Screen
+                    name="Root" 
+                    component={WelcomeScreen} 
+                    options={{
+                      title: 'Welcome',
+                      headerStyle: styles.headerStyle,
+                      headerTitleContainerStyle: styles.headerTitleContainerStyle,
+                      headerTitleStyle: styles.headerTitleStyle,
+                    }} 
+                  />
+                ) : (
                   <Stack.Screen 
                     name="Root" 
                     component={BottomTabNavigator} 
