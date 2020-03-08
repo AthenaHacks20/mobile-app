@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import PetScreen from '../screens/PetScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -32,12 +33,20 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="compass" style={styles.tabIcon} />,
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="Links"
         component={LinksScreen}
         options={{
           title: 'My Pet',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" style={styles.tabIcon} />,
+        }}
+      /> */}
+      <BottomTab.Screen
+        name="MyPet"
+        component={PetScreen}
+        options={{
+          title: 'My Pet',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="paw" />,
         }}
       />
     </BottomTab.Navigator>
