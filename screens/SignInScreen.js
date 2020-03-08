@@ -14,13 +14,15 @@ export default function SignInScreen() {
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
-            <SnigletText>Welcome to</SnigletText>
+            <SnigletText style={styles.subheaderStyle}>Welcome to</SnigletText>
+            <SnigletText style={styles.headerStyle}>AnimalAR</SnigletText>
             <Input
                 placeholder="Username"
                 value={username}
                 onChangeText={setUsername}
                 containerStyle={styles.inputContainer}
                 inputContainerStyle={{borderBottomWidth:0}}
+                inputStyle={styles.textStyle}
             />
             <Input
                 placeholder="Password"
@@ -29,11 +31,13 @@ export default function SignInScreen() {
                 secureTextEntry
                 containerStyle={styles.inputContainer}
                 inputContainerStyle={{borderBottomWidth:0}}
+                inputStyle={styles.textStyle}
             />
             <Button 
-                buttonStyle= {styles.buttonContainer} 
+                buttonStyle={styles.buttonContainer} 
                 raised title="LOGIN" 
                 onPress={() => signIn({ username, password })} 
+                titleStyle={styles.textStyle}
             />
         </View>
       </ScrollView>
@@ -46,6 +50,16 @@ SignInScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  textStyle: {
+    fontFamily: 'sniglet'
+  },
+  subheaderStyle: {
+    fontSize: 24
+  },
+  headerStyle: {
+    fontSize: 48,
+    marginBottom: 48
+  },
   container: {
     flex: 1,
     backgroundColor: '#FDF0CD',
@@ -53,8 +67,8 @@ const styles = StyleSheet.create({
   inputContainer: {
     borderColor: '#1A4876',
     borderWidth: 2,
-    borderRadius: 10,
-    marginVertical: 20,
+    borderRadius: 8,
+    marginBottom: 24,
     backgroundColor: '#fff',
   },
   contentContainer: {
@@ -64,10 +78,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: { 
     backgroundColor: "#FF6C78",
-    borderRadius: 5,
     borderColor: '#1A4876', 
     borderWidth: 2,
-    borderRadius: 25,
+    borderRadius: 24,
+    paddingTop: 12,
+    paddingLeft: 32,
+    paddingRight: 32,
+    paddingBottom: 12
   },
   welcomeContainer: {
     alignItems: 'center',
